@@ -1,6 +1,6 @@
-global.owner = ['6285346545126'] // Put your number here
-global.mods = ['6285346545126'] // Want some help?
-global.prems = ['6285346545126'] // Premium user has unlimited limit
+global.owner = ['6289614412045'] // Put your number here
+global.mods = ['6289614412045'] // Want some help?
+global.prems = ['6289614412045'] // Premium user has unlimited limit
 global.APIs = { // API Prefix
   // name: 'https://website'
   nrtm: 'https://nurutomo.herokuapp.com',
@@ -25,24 +25,24 @@ global.APIKeys = { // APIKey Here
 }
 
 //===========Sticker WM============//
-global.packname = 'bot-md'
-global.author = 'instagram\n@rasel.ganz' // this is my Instagram 😇
+global.packname = 'YanZerone'
+global.author = 'instagram\n@iy.yan_' // this is my Instagram 😇
 
-global.wm = '@rasel.ganz'
+global.wm = '@Zerone'
 global.wait = '*Tunggu sebentar ya sayang*'
 global.eror = '*Maaf server sedang sibuk*'
 
 //========Url 1 Template Buttons=========//
 global.dtu1 = 'Instagram Owner'
-global.urlnya1 = 'https://instagram.com/rasel.ganz'
+global.urlnya1 = 'https://instagram.com/iy.yan_'
 
 //========Url 2 Template Buttons=========//
 global.dtu2 = 'Group Bot WhatsApp'
-global.urlnya2 = 'https://chat.whatsapp.com/CUCsW6BWfmJLJwJgPQIaKM'
+global.urlnya2 = 'https://chat.whatsapp.com/H0MF4etPyC66WIwWuppuMl'
 
 //=============callButtons=============//
 global.dtc = 'Add Me'
-global.phn = '+62 822-5604-8971'
+global.phn = '+62 896-1441-2045'
 
 
 global.multiplier = 69 // The higher, The harder levelup
