@@ -33,8 +33,9 @@ let handler = async (m, { conn, command, text, usedPrefix }) => {
   if (yt === false) throw 'semua server gagal'
   if (yt2 === false) throw 'semua server gagal'
   let { dl_link, thumb, title, filesize, filesizeF } = yt
-  let konrasel = `
-*Title:* ${title}
+  let konrasel = `*───「 YT Downloader 」───*
+  
+*Judul:* ${title}
 *Ukuran File Audio:* ${filesizeF}
 *Ukuran File Video:* ${yt2.filesizeF}
 *Server Y2Mate:* ${usedServer}`
@@ -70,7 +71,7 @@ const template = generateWAMessageFromContent(m.key.remoteJid, proto.Message.fro
         template.message,
         { messageId: template.key.id }
     )
-//await sock.send2Template2UrlButtonLoc(m.chat,capt.trim(), wm, await (await fetch(thumb)).buffer(), 'Video', `.ytv ${vid.url}`, 'Audio', `.yta ${vid.url}`, 'Menu', '#menu', m)
+//await sock.send3Template2UrlButtonLoc(m.chat,capt.trim(), wm, await (await fetch(thumb)).buffer(), 'Video', `.ytv ${vid.url}`, 'Audio', `.yta ${vid.url}`, 'Menu', '#menu', m)
 }
 handler.help = ['play'].map(v => v + ' <query>')
 handler.tags = ['downloader']
