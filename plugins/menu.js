@@ -9,11 +9,17 @@ let fetch = require('node-fetch')
 let { perfomance } = require('perf_hooks')
 let moment = require('moment-timezone')
 const defaultMenu = {
-          before: `*Bot ini masih tahap pengembangan, jika ada bug eror fitur harap laporkan ke owner atau developer bot*
-Klik disini=>%readmore`.trimStart(),
-  header: '╭─「 *%category* 」',
-  body: '│ • %cmd %islimit %isPremium',
-  footer: '╰────\n',
+          before: `
+┌ 「 *MarsBOT-MD* 」
+│❑ Version: %version
+│❑ Library: Baileys-MD
+│❑ Mode: ${global.opts['self'] ? 'Self' : 'Publik'}
+│❑ Runtime: %uptime
+└─
+%readmore`.trimStart(),
+  header: '┌ *「 %category 」*',
+  body: '│ ≻ %cmd %islimit %isPremium',
+  footer: '└─\n',
           after: ` `,
 }
 
@@ -476,7 +482,7 @@ let help = Object.values(global.plugins).filter(plugin => !plugin.disabled).map(
     }
     text = text.replace(new RegExp(`%(${Object.keys(replace).sort((a, b) => b.length - a.length).join`|`})`, 'g'), (_, name) => '' + replace[name])
     //let pp = await conn.profilePictureUrl(conn.user.jid, 'image').catch(_ => path.join(__dirname, '../src/avatar_contact.png'))
-    await conn.send3TemplateButtonLoc(m.chat, text.trim(), wm, await(await require('node-fetch')(img)).buffer(), `🏅Owner`, `${_p}owner`, `🎖ThanksTo`, `${_p}tqto`, `🎗  Info Bot  🎗`, `${_p}infobot`, m)
+    await conn.send3TemplateButtonLoc(m.chat, text.trim(), wm, await(await require('node-fetch')(img)).buffer(), `Donasi`, `.donasi`, `My`, `.my`, `Owner`, `.owner`, m)
     } catch (e) {
     conn.reply(m.chat, 'Maaf, menu sedang error', m)
     throw e
