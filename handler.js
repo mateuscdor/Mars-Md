@@ -41,9 +41,6 @@ module.exports = {
 *│*
 *│✇ Library : Baileys-MD*
 *│✇ Language : Javascript*
-*│✇ Database : MongoDB*
-*│✇ Version : ^0.0.2*
-*│✇ Dev :* @6285346545126 
 *│✇ Runtime : ${runtime}*
 *│✇ Prefix : Multi Prefix*
 *│✇ Mode : ${global.opts['self'] ? 'Self' : 'Public'}*
@@ -249,7 +246,7 @@ module.exports = {
           if (!'jadibot' in settings) settings.groupOnly = false
           if (!'nsfw' in settings) settings.nsfw = true
           if (!isNumber(settings.status)) settings.status = 0
-          if (!'statusUpdate' in settings) settings.statusUpdate = false
+          if (!'statusUpdate' in settings) settings.statusUpdate = falsd
           if (!'antivirus' in settings) settings.antivirus = false
           if (!'publicjoin' in settings) settings.publicjoin = false
           if (!'autogetmsg' in settings) settings.autogetmsg = true
@@ -541,7 +538,7 @@ module.exports = {
                         } finally {
                             text = (action === 'add' ? (chat.sWelcome || sock.welcome || conn.welcome || 'Welcome, @user!').replace('@subject', sock.getName(id)).replace('@desc', groupMetadata.desc.toString()) :
                                 (chat.sBye || sock.bye || conn.bye || 'Bye, @user!')).replace('@user', '@' + user.split('@')[0])
-                            sock.sendButtonLoc(jid, text, wm, await(await fetch(pp)).buffer(), [[action === 'add' ? 'Welcome🙏' : 'Goodbye👋', '@rasel.ganz']], null, {
+                            sock.sendButtonLoc(jid, text, wm, await(await fetch(pp)).buffer(), [[action === 'add' ? 'Wellcome' : 'Goodbye', 'TeamMars']], null, {
                                 contextInfo: {
                                     mentionedJid: [user]
                                 }
