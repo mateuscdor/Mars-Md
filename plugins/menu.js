@@ -492,14 +492,14 @@ let help = Object.values(global.plugins).filter(plugin => !plugin.disabled).map(
            hydratedButtons: [{
              urlButton: {
                displayText: 'instagram',
-               url: 'https://instagram.com/bgsrhnsh'
+               url: 'https://instagram.com/elyas_tzy'
              }
 
            },
            {
              quickReplyButton: {
-               displayText: 'Donasi',
-               id: '.donasi',
+               displayText: '📍 Elyas Ganteng',
+               id: 'elyas ganteng',
              }
            }]
          }
