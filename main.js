@@ -54,7 +54,6 @@ global.loadDatabase = async function loadDatabase() {
     stats: {},
     msgs: {},
     sticker: {},
-    settings: {},
     ...(global.db.data || {})
   }
   global.db.chain = _.chain(global.db.data)
@@ -71,7 +70,8 @@ const { state, saveState } = useSingleFileAuthState(global.authFile)
 const connectionOptions = {
   printQRInTerminal: true,
   auth: state,
-  logger: P({ level: 'debug' })
+  logger: P({ level: 'debug' }),
+  version: [2, 2204, 13]
 }
 
 global.conn = simple.makeWASocket(connectionOptions)
@@ -84,8 +84,6 @@ if (!opts['test']) {
 }
 
 async function connectionUpdate(update) {
-  console.log(require('chalk').redBright('Mengaktifkan Bot, Harap tunggu sebentar...'))
-  conn.sendM(`6285345545126@s.whatsapp.net`)
   const { connection, lastDisconnect } = update
   global.timestamp.connect = new Date
   if (lastDisconnect && lastDisconnect.error && lastDisconnect.error.output && lastDisconnect.error.output.statusCode !== DisconnectReason.loggedOut && conn.ws.readyState !== WebSocket.CONNECTING) {
@@ -126,10 +124,10 @@ global.reloadHandler = function (restatConn) {
     conn.ev.off('creds.update', conn.credsUpdate)
   }
 
-  conn.welcome = 'Hai, @user!\nSelamat datang di grup\n@subject\n\nIntro dulu\n\n*Nama:*\n*Umur:*\n*Kelas:*\n*Status:*\n\nSemoga betah yaa!'
-  conn.bye = 'Selamat tinggal @user!\nKalo balik lagi nitip seblak yaa!'
-  conn.spromote = '*───「 PROMOTE DETECTED 」───*\n\n@user sekarang adalah admin!\n'
-  conn.sdemote = '*───「 DEMOTE DETECTED 」───*\n\n@user sekarang bukan admin!\n'
+  conn.welcome = 'Yahh! Beban nya nambah deh:(\nSelamat datang wahai Beban, di grup @subject\n\n@desc'
+  conn.bye = 'Sipp! Beban Berkurang satu'
+  conn.spromote = '@user sekarang admin!'
+  conn.sdemote = '@user sekarang bukan admin!'
   conn.handler = handler.handler.bind(conn)
   conn.participantsUpdate = handler.participantsUpdate.bind(conn)
   conn.onDelete = handler.delete.bind(conn)
@@ -216,7 +214,7 @@ async function _quickTest() {
     gm,
     find
   }
-  require('./lib/sticker').support = s
+  // require('./lib/sticker').support = s
   Object.freeze(global.support)
 
   if (!s.ffmpeg) conn.logger.warn('Please install ffmpeg for sending videos (pkg install ffmpeg)')
@@ -227,10 +225,3 @@ async function _quickTest() {
 _quickTest()
   .then(() => conn.logger.info('Quick Test Done'))
   .catch(console.error)
-
-  function clockString(ms) {
-    let h = isNaN(ms) ? '--' : Math.floor(ms / 3600000)
-    let m = isNaN(ms) ? '--' : Math.floor(ms / 60000) % 60
-    let s = isNaN(ms) ? '--' : Math.floor(ms / 1000) % 60
-    return [h, m, s].map(v => v.toString().padStart(2, 0)).join(':')
-  }
