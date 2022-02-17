@@ -161,9 +161,9 @@ let handler = async (m, { conn, usedPrefix: _p, args, command, DevMode }) => {
 
   try {
     let package = JSON.parse(await fs.promises.readFile(path.join(__dirname, '../package.json')).catch(_ => '{}'))
-    let { exp, limit, level, role, registered } = global.db.data.users[m.sender]
+    let { exp, limit, level, role, registered } = global.db.data.home[m.sender]
     let { min, xp, max } = levelling.xpRange(level, global.multiplier)
-    let name = await registered ? global.db.data.users[m.sender].name : conn.getName(m.sender)
+    let name = await registered ? global.db.data.home[m.sender].name : conn.getName(m.sender)
     let d = new Date(new Date + 3600000)
     let locale = 'id'
     let week = d.toLocaleDateString(locale, { weekday: 'long' })
@@ -417,10 +417,10 @@ let help = Object.values(global.plugins).filter(plugin => !plugin.disabled).map(
                 }, {
                 "rows": [{
                   "title":  `Shop`,
-                  "description": "Jual rdp murah dll",
+                  "description": "Jual usr murah dll",
                   "rowId": `${_p}shop`
                 }],
-                "title": "WTS RDP MURAH"
+                "title": "WTS usr MURAH"
               }
             ], "contextInfo": {
               "stanzaId": m.key.id,
@@ -472,7 +472,7 @@ let help = Object.values(global.plugins).filter(plugin => !plugin.disabled).map(
       p: _p, uptime, muptime,
       me: conn.user.name,
       npmname: package.name,
-      npmdesc: package.description,
+      npmdes package.description,
       version: package.version,
       github: package.homepage ? package.homepage.url || package.homepage : '[unknown github url]',
       name,
@@ -482,7 +482,35 @@ let help = Object.values(global.plugins).filter(plugin => !plugin.disabled).map(
     }
     text = text.replace(new RegExp(`%(${Object.keys(replace).sort((a, b) => b.length - a.length).join`|`})`, 'g'), (_, name) => '' + replace[name])
     //let pp = await conn.profilePictureUrl(conn.user.jid, 'image').catch(_ => path.join(__dirname, '../src/avatar_contact.png'))
-    await conn.send3TemplateButtonLoc(m.chat, text.trim(), wm, await(await require('node-fetch')(img)).buffer(), `Donasi`, `.donasi`, `My`, `.my`, `Owner`, `.owner`, m)
+    const template = generateWAMessageFromContent(m.chat, proto.Message.fromObject({
+     templateMessage: {
+         hydratedTemplate: {
+           hydratedContentText: text.trim(),
+           locationMessage: { 
+           jpegThumbnail: img },
+           hydratedFooterText: wm,
+           hydratedButtons: [{
+             urlButton: {
+               displayText: 'instagram',
+               url: 'https://instagram.com/bgsrhnsh'
+             }
+
+           },
+           {
+             quickReplyButton: {
+               displayText: 'Donasi',
+               id: '.donasi',
+             }
+           }]
+         }
+       }
+     }), { userJid: m.sender, quoted: m });
+    //conn.reply(m.chat, text.trim(), m)
+    return await conn.relayMessage(
+         m.chat,
+         template.message,
+         { messageId: template.key.id }
+     )
     } catch (e) {
     conn.reply(m.chat, 'Maaf, menu sedang error', m)
     throw e
